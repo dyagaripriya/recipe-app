@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(45deg, #f8cdda, #1e3c72); /* Gradient background */
+        }
+
+        .signup-container {
+            background: linear-gradient(135deg, #4e4376, #2b5876); /* Gradient background for container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+            z-index: 1;
+        }
+
+        .signup-container h2 {
+            margin-bottom: 20px;
+            color: #fefefe;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .signup-container input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid rgba(242, 243, 243, 0.893);
+            border-radius: 5px;
+            font-size: 1em;
+            outline: none;
+            color: #211f1f;
+            background: #f0f0f0; /* Light gray background */
+            transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .signup-container input::placeholder {
+            color: rgba(38, 40, 41, 0.8);
+            font-style: italic;
+        }
+
+        .signup-container input:focus {
+            border-color: #040708;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+            background-color: #ffffff; /* Change background to white on focus */
+        }
+
+        .signup-container button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            background: linear-gradient(45deg, #1e3c72, #2b5876); /* Gradient background for button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .signup-container button:hover {
+            background: linear-gradient(45deg, #1e3c72, #4e4376); /* Darker gradient on hover */
+            transform: scale(1.02);
+        }
+
+        .signup-container p {
+            color: white;
+        }
+
+        .signup-container p a {
+            color: burlywood;
+        }
+
+        .signup-container p a:hover {
+            color: rgb(242, 244, 239);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <h2>SignUp</h2>
+        <input type="text" id="username" name="username" required placeholder="Enter your name">
+        <input type="email" id="email" name="useremail" required placeholder="Enter your email">
+        <input type="password" id="password" name="password" required placeholder="Enter your password">
+        <button onclick="handleSignup()">Sign Up</button>
+        <hr>
+        <p>If you already signed up, then &nbsp;&nbsp;<a href="./login.html">Log In</a></p>
+    </div>
+
+    <script>
+        const handleSignup = () => {
+            let username = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            // Basic validation
+            if (!username || !email || !password) {
+                alert("All fields are required!");
+                return;
+            }
+
+            // Create user object
+            let userDetails = {
+                username: username,
+                email: email,
+                password: password
+            };
+
+            // Check if there are any users stored in localStorage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Add the new user to the list
+            users.push(userDetails);
+
+            // Store updated users array in localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert("Sign up successful!");
+            window.location.href = "login.html";  // Redirect to login page
+        };
+    </script>
+
+</body>
+
+</html>

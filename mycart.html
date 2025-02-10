@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+/* Basic styles for the pages */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Recipe Page Styles */
+.food-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.food-card {
+    width: 250px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 15px;
+}
+
+.food-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.food-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.food-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.food-card button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.food-card button:hover {
+    background-color: #0056b3;
+}
+
+/* Cart Page Styles */
+#cartItemsContainer {
+    margin-top: 20px;
+}
+
+.cart-item {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item h3 {
+    font-size: 16px;
+}
+
+.cart-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Your Cart</h1>
+        <div id="cartItemsContainer"></div>
+        <button onclick="checkout()">Clear the Cards</button>
+    </div>
+
+    <!-- <script src="cart.js"></script> -->
+<script>
+// Function to display the cart items
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+        cartItemsContainer.innerHTML = ""; // Clear existing items
+
+        // Display each cart item
+        cart.forEach(item => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.classList.add('cart-item');
+            cartItemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>Calories: ${item.calories}</p>
+                <a href="${item.url}" target="_blank">View Recipe</a>
+            `;
+            cartItemsContainer.appendChild(cartItemDiv);
+        });
+    }
+}
+
+// Call displayCart on page load
+window.onload = displayCart;
+
+// Checkout function (this can be expanded with actual checkout functionality)
+function checkout() {
+    alert("Proceeding to checkout...");
+    // Clear the cart after checkout
+    localStorage.removeItem('cart');
+    displayCart(); // Refresh the cart view
+}
+
+
+</script>
+</body>
+</html>
+
+ 

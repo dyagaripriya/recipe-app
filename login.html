@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Body background gradient */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(45deg, #f8cdda, #1e3c72); /* Gradient background */
+        }
+
+        /* Login container gradient */
+        .login-container {
+            background: linear-gradient(135deg, #4e4376, #2b5876); /* Gradient background for container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(28, 2, 2, 0.3);
+            text-align: center;
+            width: 350px;
+            z-index: 1;
+        }
+
+        /* Heading styling */
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #f9f6f6;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        /* Input field styling */
+        .login-container input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            outline: none;
+            background: #f0f0f0; /* Light gray background */
+            transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Placeholder text styling */
+        .login-container input::placeholder {
+            color: rgba(38, 40, 41, 0.8);
+            font-style: italic;
+        }
+
+        /* Focus effect for inputs */
+        .login-container input:focus {
+            border-color: #040708;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+            background-color: #ffffff; /* Change background to white on focus */
+        }
+
+        /* Button gradient background */
+        .login-container button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            background: linear-gradient(45deg, #1e3c72, #2b5876); /* Gradient background for button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Hover effect for button */
+        .login-container button:hover {
+            background: linear-gradient(45deg, #1e3c72, #4e4376); /* Darker gradient on hover */
+            transform: scale(1.02);
+        }
+
+        /* Link styling */
+        .login-container p {
+            color: white;
+        }
+
+        .login-container p a {
+            color: burlywood;
+        }
+
+        .login-container p a:hover {
+            color: rgb(242, 244, 239);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" name="username" required placeholder="Enter your name" pattern="[A-Za-z0-9]+">
+        <input type="password" id="password" name="password" required placeholder="Enter your password">
+        <button onclick="handleLogin()">Log In</button>
+        <hr>
+        <p>If you already signed up, then &nbsp;&nbsp;<a href="./signup.html">SignUp</a></p>
+    </div>
+
+    <script>
+        const handleLogin = () => {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+
+            // Get users from localStorage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Check if the entered credentials match any stored user
+            let validUser = users.find(user => user.username === username && user.password === password);
+
+            if (validUser) {
+                alert("Login successful!");
+                localStorage.setItem('isLoggedIn', 'true');  // Set login status in localStorage
+                window.location.href = "home.html";  // Redirect to another page after login
+            } else {
+                alert("Invalid credentials, please try again.");
+            }
+
+            // Clear the form
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        };
+    </script>
+
+</body>
+
+</html>

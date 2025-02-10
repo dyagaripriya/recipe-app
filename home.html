@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Search</title>
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Kitchen Stories</h1>
+
+      <input
+        type="text"
+        id="searchinput"
+        placeholder="Search for a recipe ..."
+      />
+      <button onclick="searchrecipe()">Search</button>
+      <button id="voiceButton">🎙️ Voice Search</button>
+      <div id="dynamic-food-cards" class="food-cards"></div>
+      <div id="recipecontainer" class="items"></div>
+    </div>
+
+    <button
+      id="backButton"
+      onclick="showDynamicFoodCards()"
+      style="display: none"
+    >
+      Back
+    </button>
+
+    <!-- <div id="dynamic-food-cards"></div> -->
+    <a href="./mycart.html" class="redirect-link">My Cart</a>
+
+    <button id="logoutButton" style="display: none">
+      Logout
+    </button>
+
+    <div id="cartContainer">
+      <!-- <h2>Cart</h2> -->
+      <ul id="cartItems"></ul>
+      <!-- This will list the items in the cart -->
+    </div>
+
+    <script src="script2.js"></script>
+  </body>
+</html>
